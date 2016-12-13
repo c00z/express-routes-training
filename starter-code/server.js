@@ -22,6 +22,34 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // ROUTES
 // Root Route
+//
+app.get('/', function (request, response) {
+  response.sendFile('views/index.html' , { root : __dirname});
+
+});
+
+//NUMBER GUESS
+var numberGuess = 4
+app.get('/pick-a-number', function (request, response) {
+  var num = Number(request.query.number);
+  if(num === numberGuess) {
+    response.send('YOU GUESSED IT!');
+  } else if (num > numberGuess) {
+    response.send('Too high, guess again!');
+  } else if (num < numberGuess) {
+    response.send('Too low, guess again!');
+  } else {
+    response.send('wtf is that?!');
+  }
+});
+
+//PUSH NUMBER
+app.post('/pick-a-number', function (request, response) {
+    numberguess = Number(request.body.number);
+    response.status(200).send('Number updated successfully!');
+  });
+
+
 
 
 // Gallery View Route
