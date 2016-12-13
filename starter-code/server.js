@@ -27,7 +27,7 @@ app.get('/', function (request, response) {
   response.sendFile('views/index.html' , { root : __dirname});
 
 });
-
+// The Number Guessing Game
 //NUMBER GUESS
 var numberGuess = 4
 app.get('/pick-a-number', function (request, response) {
@@ -43,22 +43,26 @@ app.get('/pick-a-number', function (request, response) {
   }
 });
 
-//PUSH NUMBER
+//Change Target Number
 app.post('/pick-a-number', function (request, response) {
-    numberguess = Number(request.body.number);
+    numberGuess = Number(request.body.number);
     response.status(200).send('Number updated successfully!');
   });
 
 
 
 
-// Gallery View Route
-
-
-// The Number Guessing Game
-
-
 // Gallery
+app.get("/artworks",function(request, response) {
+  response.json(artWorks);
+});
+
+
+var artWorks = [
+  ["Title"],
+  ["Description"],
+  ["Artist"],
+];
 
 
 // SERVER START
