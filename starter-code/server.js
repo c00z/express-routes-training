@@ -11,14 +11,6 @@ app.use(express.static('public'));
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Allow CORS:
-// not necessary since we'll be making requests from a js file
-  // that we are also serving (as static assets in public)
-// app.use(function(request, response, next) {
-//   response.header("Access-Control-Allow-Origin", "*");
-//   response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
 
 // ROUTES
 // Root Route
@@ -27,6 +19,11 @@ app.get('/', function (request, response) {
   response.sendFile('views/index.html' , { root : __dirname});
 
 });
+
+app.get('/art-gallery', function (request, response) {
+  response.sendFile('views/art-gallery.html' , { root : __dirname});
+});
+
 // The Number Guessing Game
 //NUMBER GUESS
 var numberGuess = 4
@@ -55,6 +52,16 @@ app.post('/pick-a-number', function (request, response) {
 // Gallery
 app.get("/artworks",function(request, response) {
   response.json(artWorks);
+});
+
+app.post('/artworks', function(request, response){
+  var newArtwork = {
+    name: request.body.title,
+    description: request.body.description,
+    artist: request.body.artist
+  };
+  artworks.push(newArtwork);
+  response.json(artworks);
 });
 
 
